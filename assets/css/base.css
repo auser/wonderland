@@ -1,9 +1,10 @@
-body { margin: 20px 0 0 0; }
+body { 
+	margin: 20px 0 0 0; 	
+}
+
 p {
-	font:60px/100px Helvetica;
 	color: #000;
 	text-align: center;
-	border: 1px solid #000;
 	margin: 0 0 20px 0;
 }
 
@@ -15,4 +16,131 @@ li {
 	padding-left: 20px;
 	margin-bottom: 5px;
 	list-style-type: square;
+}
+
+.container {
+  width: 888px;
+  margin: 0 auto;
+  padding-top: 50px;
+  overflow: hidden;
+	text-align: center;
+}
+
+#header {
+	text-align: center;
+	min-height: 120px;
+	padding: 0;
+	border-bottom: 3px solid #eee;
+}
+
+#header h1 a {
+  color: #151515;
+	text-align: left;
+  font-size: 62px;
+  font-family: Palatino, "Palatino Linotype", Serif;  
+  text-decoration: none;
+	padding-left: 100px;	
+}
+
+#header span {
+	color: #BE3081;
+}
+
+#header .container {
+	background: #FFF url("../images/cat.jpg") no-repeat 228px top;
+	height: 88px;
+  width: auto;
+  margin: 0;
+}
+
+#content {
+  width: 480px;
+  float: left;
+	text-align: left;
+}
+
+#content h3 {
+	color: #151515;
+  font-family: Palatino, "Palatino Linotype", Serif;  
+  text-decoration: none;
+	font-size: 26px;
+}
+
+#content ul li {
+	color: #115;
+	list-style-type: none;
+	text-align: left;
+  font-family: Palatino, "Palatino Linotype", Serif;  
+  text-decoration: none;
+	margin: 10px;
+}
+
+#sidebar {
+  width: 256px;
+	text-align: left;
+  float: right;
+}
+
+#sidebar a {
+	text-decoration: none;
+}
+
+#sidebar dl dt{
+  background: inherit;
+  color: #151515;
+  font-size: 25px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+	padding-left: 20px;
+}
+
+#sidebar dl dt#node_status_link { background: url("../images/server.png") no-repeat 0 center;	}
+#sidebar dl dt#vhosts_link { background: url("../images/transmit.png") no-repeat 0 center;	}
+#sidebar dl dt#users_link { background: url("../images/user_suit.png") no-repeat 0 center;	}
+
+#sidebar dl dd {
+  margin-left: 2px;
+}
+
+#sidebar dl dt a:hover {
+  color: #000;
+}
+
+#sidebar .widget {
+  margin: 0 0 32px 0;
+}
+
+#sidebar dl {
+  line-height: 1.5;
+}
+
+#sidebar dd {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #DDD;
+  font-size: 11px;
+}
+
+#sidebar dd a {
+  background: inherit;
+  color: #333;
+  text-decoration: underline;
+}
+
+#sidebar dd a:hover {
+  background: inherit;
+  color: #000;
+}
+
+#sidebar dl dd:last-child {
+  border: 0;
+}
+
+#footer {
+	border-top: 1px solid #999;
+  color: #115;	
+  margin: 0 auto;
+	margin-top: 20px;
+  padding-top: 30px;
+  overflow: hidden;
+	text-align: center;
 }

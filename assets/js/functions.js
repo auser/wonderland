@@ -7,3 +7,12 @@ function traverse(key, jsonObj, func) {
 			func(key,jsonObj);
     }
 };
+
+function listify(obj, func) {
+	var outList = "<ul>";
+	$(obj).each(function(i, ele){
+		outList += "<li>"+func(ele)+"</li>";
+	});
+	outList += "</ul>";
+	return outList;
+};

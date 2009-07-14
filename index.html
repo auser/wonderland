@@ -9,41 +9,45 @@
   <script type="text/javascript" src="assets/js/functions.js"></script>
   <script type="text/javascript" src="assets/js/site.js"></script>
   
-  <link rel="stylesheet" href="assets/css/grid.css" type="text/css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="assets/css/reset.css" type="text/css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="assets/css/base.css" type="text/css" media="screen" charset="utf-8">
 </head>
 
 <body>
-
-  <div class="row">
-  	<div class="column grid_12">
-  	  <h1>Dashboard</h1>
-  	</div>
-  </div>
-    
-  <div class="row">      
-			<div class="column grid_4"><p>
-			  <h3>Rabbit node status</h3>
-        <div id="status"></div>
-			</p></div>
-			<div class="column grid_4"><p>
-			  <h3>Vhosts</h3>
-        <div id="vhosts"></div>
-			</p>
-		</div>
-  	<div class="column grid_4">
-  	  <p style="line-height: 222px;">
-  	    <h3>Users</h3>
-        <div id="users"></div>
-  	  </p>
-  	</div>
+  <div id="header">
+    <div class="container">
+      <h1><a href="/">wonder<span>land</span></a></h1>
+    </div>
   </div>
   
-  <div class="row">
-  	<div class="column grid_4">
-  	  <h3>Rabbit connection status</h3>
-      <div id="conn_status"></div>
-  	</div>
+  <div class="container">
+    <div id="sidebar">
+      
+      <div class="widget">
+        <dl>
+          <dt id="node_status_link"><a href="#rabbit_status">Rabbit node status</a></dt>
+          <dd>Check the status of the rabbit node</dd>
+          
+          <dt id="vhosts_link"><a href="#vhosts">Vhosts</a></dt>
+          <dd>Vhost information</dd>
+          
+          <dt id="users_link"><a href="#users">Users</a></dt>
+          <dd>User information</dd>
+        </dl>
+			</div>
+      
+    </div>
+    
+    <div id="content">
+      Alice the app
+      <!-- <div id="status"></div>
+      <div id="vhosts"></div>
+      <div id="users"></div> -->
+    </div>
+  </div>
+  
+  <div id="footer">
+    Copyright &#169; 2009 Ari Lerner @ CloudTeam
   </div>
   
 </body>
