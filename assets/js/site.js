@@ -197,6 +197,7 @@ $(function(){
 					};
 
 					state.currentBinding.push(newBinding);
+					newBinding();
 
 					// UGLY				
 					// add_link = "<div class='add'><a href='#'>Add</a></div>";
