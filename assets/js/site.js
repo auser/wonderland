@@ -1,5 +1,6 @@
 $(function(){
 	
+	// NOT VERY HAPPY WITH THIS
 	var state = {
 		currentForm : "<form></form>",
 		currentBinding : []
@@ -37,6 +38,17 @@ $(function(){
 		$.post(aliceUrl + url, data, opts.success, "json");
 		state = originalBindings(state);
 	};
+	
+	function delete_data_to(data, url, opts) {
+		$.ajax({
+		      url: aliceUrl + url,
+		      global: false,
+		      type: "DELETE",
+		      data: data,
+		      dataType: "json",
+		      success: opts.success
+		   })
+	};
  
 	var updateStatusFunc = function() {
 		url_load_into("/control/status", {
@@ -64,50 +76,66 @@ $(function(){
 			success: function(jobj) {			
 				var vhosts = $(jobj.data.vhosts);
 				
-				var newBinding = function() {
-					var currentForm = '<form method="post" name="new_vhost_form" action="#" onSubmit="">';
-					currentForm += "<fieldset>";     
+				var currentForm = '<form method="post" name="new_vhost_form" action="#">';
+				currentForm += "<fieldset>";     
 
-					currentForm += "<label for='vhost'>Vhost</label>";
-					currentForm += "<input type='text' id='vhost_name' name='vhost' class='text-input'></input>";
+				currentForm += "<label for='vhost'>Vhost</label>";
+				currentForm += "<input type='text' id='vhost_name' name='vhost' class='text-input'></input>";
 
-					currentForm += '<input type="submit" value="Submit" class="submit"/>'
-					currentForm += '<span class="error" style="display:none"> Please Enter Valid Data</span>';
-					currentForm += '<span class="success" style="display:none"> Registration Successfully</span></div>';
-					currentForm += "</fieldset>";
-					currentForm += "</form>";
-					
-					$(".hidden").append(currentForm);
-					
+				currentForm += '<input type="submit" value="Submit" class="submit"/>'
+				currentForm += "</fieldset>";
+				currentForm += "</form>";
+				
+				$(".hidden").html(currentForm);
+				
+				var newBinding = function() {					
 					$(".add").click(function() {
 						$(".hidden").show();
 						jQuery.facebox($(".hidden"));
 					});
 					
-					$("")
-					console.log("hi %o", $(".submit"));
-					$(".submit").click(function() {
-						var vhost = $("#vhost_name").val();
-						var dataString = {"name":vhost};
-						
-						console.log("dataString %o", dataString);
-						post_data_to(dataString, "/vhosts", {
-						success: function(data) {
-							alert("success!!!");
-						}
+					$(".remove a").click(function() {						
+						var vhost = this.rel;
+						var dataString = {"name" : vhost};
+						console.log("json: %o", $.toJSON(dataString));
+						delete_data_to($.toJSON(dataString), "/vhosts/"+vhost, {
+							success: function(data) { 
+								updateVhostFunc(); 
+							}
 						});
 						return false;
 					});
 					
+					$(".submit").click(function() {
+						var vhost = $("#vhost_name").val();
+						var dataString = {"name" : vhost};
+						
+						post_data_to($.toJSON(dataString), "/vhosts", {
+							success: function(data) { 
+								$.facebox.close();
+								updateVhostFunc();
+							}
+						});
+						return false;
+					});
+										
 				};
 				
 				state.currentBinding.push(newBinding);
 				
 				// UGLY				
-				add_link = "<div class='add'><a href='#'>Add</a></div>";
-				jobj.out = "<h3>"+add_link+"Vhosts</h3>";
+				// add_link = "<div class='add'><a href='#'>Add</a></div>";
+				jobj.out = "<div class='large add'>Vhosts</div>";
 		    
-				jobj.out += listify(vhosts, function(item){return item;});
+				jobj.out += listify(vhosts, function(item){
+					if (item == "") {return null;} else {
+						if (item == "/") {
+							return "<a style='padding-left: 25px;' href='#' rel='"+item+"'>" + item + "</a>"
+						} else {
+							return "<div class='remove'><a href='#' rel='"+item+"'>" + item + "</a></div>";
+						}						
+					}
+				});
 				return jobj;
 			}
 		});
@@ -115,16 +143,78 @@ $(function(){
 	$("#vhosts_link").click(updateVhostFunc);
 	
 	var updateUsersFunc = function() {
-		url_load_into("/users", {
-			success: function(jobj) {			
-				var users = $(jobj.data.users);
-				jobj.out = "<h3>Users</h3>";
-				jobj.out += listify(users, function(item){return item;});
-				
-				return jobj;
-			}
-		});
-	};
+			url_load_into("/users", {
+				success: function(jobj) {
+					var users = $(jobj.data.users);
+
+					var currentForm = '<form method="post" name="new_user_form" action="#">';
+					currentForm += "<fieldset>";     
+
+					currentForm += "<label for='user'>username</label>";
+					currentForm += "<input type='text' id='user_name' name='username' class='text-input'></input><br />";
+					
+					currentForm += "<label for='pass'>password</label>";
+					currentForm += "<input type='password' id='pass' name='pass' class='text-input'></input><br />";
+
+					currentForm += '<input type="submit" value="Submit" class="submit"/>'
+					currentForm += "</fieldset>";
+					currentForm += "</form>";
+
+					$(".hidden").html(currentForm);
+
+					var newBinding = function() {
+						$(".add").click(function() {
+							$(".hidden").show();
+							jQuery.facebox($(".hidden"));
+						});
+
+						$(".remove a").click(function() {
+							var user = this.rel;
+							var dataString = {"name" : user};
+							console.log("json: %o", $.toJSON(dataString));
+							delete_data_to($.toJSON(dataString), "/users/"+user, {
+								success: function(data) { 
+									updateUsersFunc(); 
+								}
+							});
+							return false;
+						});
+
+						$(".submit").click(function() {
+							var user = $("#user_name").val();
+							var pass = $("#pass").val();
+							var dataString = {"username" : user, "password":pass};
+
+							post_data_to($.toJSON(dataString), "/users", {
+								success: function(data) { 
+									$.facebox.close();
+									updateUsersFunc();
+								}
+							});
+							return false;
+						});
+
+					};
+
+					state.currentBinding.push(newBinding);
+
+					// UGLY				
+					// add_link = "<div class='add'><a href='#'>Add</a></div>";
+					jobj.out = "<div class='large add'>users</div>";
+
+					jobj.out += listify(users, function(item){
+						if (item == "") {return null;} else {
+							if (item == "/") {
+								return "<a style='padding-left: 25px;' href='#' rel='"+item+"'>" + item + "</a>"
+							} else {
+								return "<div class='remove'><a href='#' rel='"+item+"'>" + item + "</a></div>";
+							}						
+						}
+					});
+					return jobj;
+				}
+			});
+		};
 	$("#users_link").click(updateUsersFunc);
 	
 	var updateConnectionStatusFunc = function() {

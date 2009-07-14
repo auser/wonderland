@@ -20,7 +20,10 @@ function traverse(key, jsonObj, func) {
 function listify(obj, func) {
 	var outList = "<ul>";
 	$(obj).each(function(i, ele){
-		outList += "<li>"+func(ele)+"</li>";
+		var o = func(ele);
+		if (o != null) {
+			outList += "<li>"+o+"</li>";
+		};		
 	});
 	outList += "</ul>";
 	return outList;

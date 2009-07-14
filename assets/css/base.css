@@ -146,10 +146,15 @@ li {
 	font-size: 11px;
 }
 
-.hidden {
-	display: none;
+.hidden {display: none;}
+.inline {display: inline;}
+
+.large {font-size: 32px;}
+
+.add {
+	background: #FFF url("../images/add.png") no-repeat 2px center;
+	padding-left: 25px;
 }
-.add {background: #FFF url("../images/add.png") no-repeat 2px top;}
-.add a {
-	padding-left: 1000px;
-}
+
+.remove:hover {background: url("../images/delete.png") no-repeat 2px top;}
+.remove a {padding-left: 25px;}
