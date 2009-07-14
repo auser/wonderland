@@ -143,4 +143,13 @@ li {
   padding-top: 30px;
   overflow: hidden;
 	text-align: center;
+	font-size: 11px;
+}
+
+.hidden {
+	display: none;
+}
+.add {background: #FFF url("../images/add.png") no-repeat 2px top;}
+.add a {
+	padding-left: 1000px;
 }

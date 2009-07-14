@@ -1,5 +1,13 @@
 $(function(){
- 
+	
+	var state = {
+		currentForm : "<form></form>",
+		currentBinding : []
+	};
+	
+  state = originalBindings(state);
+	var aliceUrl = "http://localhost:9999";
+	
 	function url_load_into(url, opts) {
 		$.ajax({
 		  url: aliceUrl + url,
@@ -9,17 +17,26 @@ $(function(){
 				var jobj = {
 					data: data,
 					out: "",
-					domEle: document.createElement('div')
+					domEle: document.createElement('div'),
+					after: function() {}
 				};
 				jobj = opts.success(jobj);
 				$(jobj.domEle).prepend(jobj.out);
 				$("#content").html($(jobj.domEle));
+				
+				console.log("Calling after for %o", $(jobj));
+				$(jobj.after());
+				
+				state = originalBindings(state);
 			},
 			error: opts.error
 			});
 	};
 	
-	var aliceUrl = "http://localhost:9999";
+	function post_data_to(data, url, opts) {
+		$.post(aliceUrl + url, data, opts.success, "json");
+		state = originalBindings(state);
+	};
  
 	var updateStatusFunc = function() {
 		url_load_into("/control/status", {
@@ -32,7 +49,8 @@ $(function(){
 				jobj.out += listify(status.running_nodes, function(item){return item;});
 				
 				jobj.out += "<h3>All nodes</h3>";
-				jobj.out += listify(status.nodes, function(item){return item;});
+				jobj.out += listify(status.nodes, function(item){return item;});				
+				
 				return jobj;
 			}
 		});
@@ -45,7 +63,50 @@ $(function(){
 		url_load_into("/vhosts", {
 			success: function(jobj) {			
 				var vhosts = $(jobj.data.vhosts);
-				jobj.out = "<h3>Vhosts</h3>";
+				
+				var newBinding = function() {
+					var currentForm = '<form method="post" name="new_vhost_form" action="#" onSubmit="">';
+					currentForm += "<fieldset>";     
+
+					currentForm += "<label for='vhost'>Vhost</label>";
+					currentForm += "<input type='text' id='vhost_name' name='vhost' class='text-input'></input>";
+
+					currentForm += '<input type="submit" value="Submit" class="submit"/>'
+					currentForm += '<span class="error" style="display:none"> Please Enter Valid Data</span>';
+					currentForm += '<span class="success" style="display:none"> Registration Successfully</span></div>';
+					currentForm += "</fieldset>";
+					currentForm += "</form>";
+					
+					$(".hidden").append(currentForm);
+					
+					$(".add").click(function() {
+						$(".hidden").show();
+						jQuery.facebox($(".hidden"));
+					});
+					
+					$("")
+					console.log("hi %o", $(".submit"));
+					$(".submit").click(function() {
+						var vhost = $("#vhost_name").val();
+						var dataString = {"name":vhost};
+						
+						console.log("dataString %o", dataString);
+						post_data_to(dataString, "/vhosts", {
+						success: function(data) {
+							alert("success!!!");
+						}
+						});
+						return false;
+					});
+					
+				};
+				
+				state.currentBinding.push(newBinding);
+				
+				// UGLY				
+				add_link = "<div class='add'><a href='#'>Add</a></div>";
+				jobj.out = "<h3>"+add_link+"Vhosts</h3>";
+		    
 				jobj.out += listify(vhosts, function(item){return item;});
 				return jobj;
 			}
@@ -89,5 +150,5 @@ $(function(){
 			}
 		});
 	};
-	
+
 });

@@ -1,3 +1,12 @@
+function originalBindings(state) {
+	
+	$(state.currentBinding).each(function(i, binding) {
+		binding();
+	});
+	state.currentBinding = [];
+	return state;
+};
+
 function traverse(key, jsonObj, func) {
     if( typeof jsonObj == "object" ){
 	    $.each(jsonObj, function(k,v) {
