@@ -30,6 +30,22 @@
 			});
     }});
 
+    get('#/connections', function() { with (this) {			
+			get_page("/conn/address/port/peer_address/peer_port/state/channels/user/vhost/timeout/frame_max/recv_oct/recv_cnt/send_oct/send_cnt/send_pend", {
+				success: function(data) {partial('/assets/templates/connections.html', {conns: $(data.conn)})},
+				error: function() {error("Unable to load connections");}
+			});
+    }});
+
+    get('#/queues', function() { with (this) {
+			var vhost;
+			if (params["name"]) {vhost = params["name"];} else {vhost = "root"};
+	get_page("/queues/"+vhost+"/name/durable/auto_delete/arguments/messages_ready/messages_unacknowledged/messages_uncommitted/messages/acks_uncommitted/consumers/transactions/memory", {
+				success: function(data) {console.log(data);partial('/assets/templates/queues.html', data)},
+				error: function() {error("Unable to load queues");}
+			});
+    }});
+
     get('#/rabbit_status', function() { with (this) {
 			redirect("#/");
 			return false;

@@ -1,0 +1,18 @@
+<script type="text/javascript" charset="utf-8">
+</script>
+
+<div id="connections">
+
+  <h3>Current connections</h3>
+    
+  <% for ( var i = 0; i < conns.length; i++ ) { %>
+    <hr />
+    <ul id="conn_status_<%=i%>">
+      <% traverse('conn', conns[i], function(key, val) { %>
+        <li><%= key %> = <%= val %></li>
+      <% }); %>
+    </div>
+    
+  <% } %>
+  
+</div>

@@ -1,0 +1,15 @@
+<div id="queues">
+
+  <h3>Queues</h3>
+  
+  <% for ( var i = 0; i < queues.length; i++ ) { %>
+    <hr />
+    <% console.log(queues[i]); %>
+    <ul id="conn_status_<%=i%>">
+      <% traverse('queues', queues[i], function(key, val) { %>
+        <li><%= key %> = <%= val %></li>
+      <% }); %>
+    </div>
+  <% } %>
+
+</div>

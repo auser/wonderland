@@ -110,6 +110,8 @@ li {
 #sidebar dl dt#node_status_link { background: url("../images/server.png") no-repeat 0 center;	}
 #sidebar dl dt#vhosts_link { background: url("../images/transmit.png") no-repeat 0 center;	}
 #sidebar dl dt#users_link { background: url("../images/user_suit.png") no-repeat 0 center;	}
+#sidebar dl dt#connections_link { background: url("../images/connect.png") no-repeat 0 center;}
+#sidebar dl dt#queues_link { background: url("../images/basket.png") no-repeat 0 center;}
 
 #sidebar dl dd {
   margin-left: 2px;
