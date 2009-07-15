@@ -28,9 +28,11 @@
 	$(".remove a").click(function() {						
 		var user = this.rel;
 		var dataString = {"name" : user};
-		post_delete("/users/"+user, {
-		  data: $.toJSON(dataString),
-			success: function(data) {$("li#"+user).remove();}
+		are_you_sure("Are you sure you want to remove "+user, function() {
+		  post_delete("/users/"+user, {
+  		  data: $.toJSON(dataString),
+  			success: function(data) {$("li#"+user).remove();}
+  		});
 		});
 	});	
 </script>

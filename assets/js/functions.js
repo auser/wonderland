@@ -43,6 +43,13 @@ function _ajax_method(meth, url, opts) {
 	return false;
 };
 
+function are_you_sure(msg, callback) {
+	if (confirm(msg)) {
+		callback()
+	} else {
+	}
+}
+
 function traverse(key, jsonObj, func) {
     if( typeof jsonObj == "object" ){
 	    $.each(jsonObj, function(k,v) {

@@ -25,9 +25,11 @@
 	$(".remove a").click(function() {						
 		var vhost = this.rel;
 		var dataString = {"name" : vhost};
-		post_delete("/vhosts/"+vhost, {
-		  data: $.toJSON(dataString),
-			success: function(data) {$("li#"+vhost).remove();}
+		are_you_sure("Are you sure you want to remove "+vhost, function() {
+  		post_delete("/vhosts/"+vhost, {
+  		  data: $.toJSON(dataString),
+  			success: function(data) {$("li#"+vhost).remove();}
+  		});
 		});
 	});	
 </script>
