@@ -6,11 +6,11 @@
   <title>Alice, the app - VERY MUCH IN CONSTRUCTION</title>
   
   <script type="text/javascript" src="assets/js/jquery-1.3.2.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery.json-1.3.min.js"></script>
-  <script type="text/javascript" src="assets/js/functions.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.json-1.3.min.js"></script>  
   <script type="text/javascript" src="assets/js/facebox.js"></script>
   <script type="text/javascript" src="assets/js/sammy.min.js"></script>
-  <script type="text/javascript" src="assets/js/site.js"></script>
+  <script type="text/javascript" src="assets/js/functions.js"></script>
+  <script type="text/javascript" src="assets/js/app.js"></script>
   
   <link rel="stylesheet" href="assets/css/reset.css" type="text/css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="assets/css/facebox.css" type="text/css" media="screen" charset="utf-8">
@@ -26,18 +26,28 @@
     </div>
   </div>
   
-  <div class="container">
+  <div id="error">
+    <div class="message">      
+    </div>
+  </div>
+  
+  <div id="notice">
+    <div class="message">      
+    </div>
+  </div>
+  
+  <div class="container">        
     <div id="sidebar">
       
       <div class="widget">
         <dl>
-          <dt id="node_status_link"><a href="#rabbit_status">Rabbit node status</a></dt>
+          <dt id="node_status_link"><a href="#/rabbit_status">Rabbit node status</a></dt>
           <dd>Check the status of the rabbit node</dd>
           
-          <dt id="vhosts_link"><a href="#vhosts">Vhosts</a></dt>
+          <dt id="vhosts_link"><a href="#/vhosts">Vhosts</a></dt>
           <dd>Vhost information</dd>
           
-          <dt id="users_link"><a href="#users">Users</a></dt>
+          <dt id="users_link"><a href="#/users">Users</a></dt>
           <dd>User information</dd>
         </dl>
 			</div>

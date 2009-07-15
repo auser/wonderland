@@ -26,6 +26,20 @@ li {
 	text-align: center;
 }
 
+#notice,
+#error {
+	width: 888px;
+	margin: 0 auto;	
+	color: #333;
+	height: 0;
+	display: none;
+	padding-left: 10px;	
+	padding-top: 10px;	
+}
+
+#error {background: #ee1;}
+#notice {background: #EDECE6;}
+
 #header {
 	text-align: center;
 	min-height: 120px;
@@ -48,7 +62,7 @@ li {
 
 #header .container {
 	background: #FFF url("../images/cat.jpg") no-repeat 228px top;
-	height: 88px;
+	height: 78px;
   width: auto;
   margin: 0;
 }

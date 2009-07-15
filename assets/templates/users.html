@@ -1,0 +1,48 @@
+<script type="text/javascript" charset="utf-8">
+  $(".add").click(function() {     
+  jQuery.facebox('
+  <form id="new_user_form" action="#/users" method="post">
+    <p><label for="user_name">Username:</label><input type="text" id="user_name" name="user_name" /></p>
+    <p><label for="pass">Password:</label><input type="password" id="pass" name="pass" /></p>
+    <p><input type="submit" value="Add user" /></p>
+  </form>
+  ');
+	
+  	$("form#new_user_form").submit(function() {
+  		var user = $("#user_name").val();
+  		var pass = $("#pass").val();
+  		
+  		var dataString = {"username" : user, "password":pass};
+  		post("/users", {
+  		  data: $.toJSON(dataString),
+  			success: function(data) {
+  				$.facebox.close();
+  				$("#users_list").append('<li id="'+user+'"><div class="remove"><a href="#" rel="'+user+'">'+user+'</a></div></li>');
+  				alert("Added!");
+  			}
+  		});
+  	});
+	 
+  });
+	
+	$(".remove a").click(function() {						
+		var user = this.rel;
+		var dataString = {"name" : user};
+		post_delete("/users/"+user, {
+		  data: $.toJSON(dataString),
+			success: function(data) {$("li#"+user).remove();}
+		});
+	});	
+</script>
+
+<div id="users">
+  
+  <div class="add"><h3>Users</h3></div>
+  
+  <ul id="users_list">
+    <% for ( var i = 0; i < users.length; i++ ) { %>
+      <li id="<%= users[i] %>"><div class='remove'><a href='#' rel='<%= users[i] %>'></a><%= users[i] %></div></li>
+    <% } %>
+  </ul>
+  
+</div>
