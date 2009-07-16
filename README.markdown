@@ -5,9 +5,9 @@ Wonderland is the web front-end to http://www.alicetheapp.com
 ## Starting
   Grab Alice and type:
   
-  cd alice
-  make wonderland
-  ./start.sh
+    cd alice
+    make wonderland
+    ./start.sh
   
   This will grab the latest wonderland source and install it in your web/ directory
   
