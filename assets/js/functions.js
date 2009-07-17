@@ -16,7 +16,7 @@ function refresh_page(location) {
 }
 
 // AJAX
-var aliceUrl = "http://localhost:9999";
+var aliceUrl = "http://" + window.location.host;//var aliceUrl = "http://localhost:9999";
 
 function get_page(url, opts) {
 	_ajax_method("GET", url, opts);
