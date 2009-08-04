@@ -112,6 +112,8 @@ li {
 #sidebar dl dt#users_link { background: url("../images/user_suit.png") no-repeat 0 center;	}
 #sidebar dl dt#connections_link { background: url("../images/connect.png") no-repeat 0 center;}
 #sidebar dl dt#queues_link { background: url("../images/basket.png") no-repeat 0 center;}
+#sidebar dl dt#bindings_link { background: url("../images/bindings.png") no-repeat 0 center;}
+#sidebar dl dt#exchanges_link { background: url("../images/exchanges.png") no-repeat 0 center;}
 
 #sidebar dl dd {
   margin-left: 2px;

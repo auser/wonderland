@@ -1,0 +1,21 @@
+<script type="text/javascript" charset="utf-8">
+</script>
+
+<div id="Exchanges">
+  
+  <h3>Exchanges</h3>
+  
+  <ul id="exchanges_list">
+    <% for ( var i = 0; i < exchanges.length; i++ ) { %>
+      <ul id="exchanges_<%= [i] %>">
+        <li>Name: <%= exchanges[i].name %></li>
+        <li>Topic: <%= exchanges[i].type %></li>
+        <li>Durable: <%= exchanges[i].durable %></li>
+        <li>Auto delete: <%= exchanges[i].auto_delete %></li>
+        <li>Arguments: <%= exchanges[i].arguments %></li>
+      </li>
+      <hr />
+    <% } %>
+  </ul>
+  
+</div>

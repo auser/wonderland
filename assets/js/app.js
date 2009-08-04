@@ -29,6 +29,20 @@
 				error: function() {error("Unable to load users");}
 			});
     }});
+    
+    get('#/bindings', function() { with (this) {			
+			get_page("/bindings", {
+				success: function(data) {partial('/assets/templates/bindings.html', data);},
+				error: function() {error("Unable to load bindings");}
+			});
+    }});
+    
+    get('#/exchanges', function() { with (this) {			
+			get_page("/exchanges", {
+				success: function(data) {partial('/assets/templates/exchanges.html', data);},
+				error: function() {error("Unable to load exchanges");}
+			});
+    }});
 
     get('#/connections', function() { with (this) {			
 			get_page("/conn/address/port/peer_address/peer_port/state/channels/user/vhost/timeout/frame_max/recv_oct/recv_cnt/send_oct/send_cnt/send_pend", {
