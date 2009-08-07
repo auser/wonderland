@@ -9,7 +9,6 @@ function show_div(data, div_id) {
 function refresh_page(location) {
 	get_page(location, {
 		success: function(data) {
-			console.log("Get data");
 			$(document.body).html(data)
 		}
 	})
@@ -71,3 +70,7 @@ function listify(obj, func) {
 	outList += "</ul>";
 	return outList;
 };
+
+function show_graph(div, data, labels, opts) {
+  $(div).simplegraph(data, labels, opts);
+}

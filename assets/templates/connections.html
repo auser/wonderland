@@ -5,7 +5,7 @@
 
   <h3>Current connections</h3>
     
-  <% for ( var i = 0; i < conns.length; i++ ) { %>
+  <!-- <% for ( var i = 0; i < conns.length; i++ ) { %>
     <hr />
     <ul id="conn_status_<%=i%>">
       <% traverse('conn', conns[i], function(key, val) { %>
@@ -13,6 +13,29 @@
       <% }); %>
     </div>
     
-  <% } %>
+  <% } %>      -->
+  
+  <table id="data" class="sexy_table">
+  	<caption>Connections</caption>
+  	<thead>
+      <tr>
+        <th>ip</th>
+        <th>port</th>
+        <th>peer_address</th>
+        <th>user</th>
+      </tr>
+  	</thead>
+  	<tbody>
+      <% for ( var i = 0; i < conns.length; i++ ) { %>
+        <tr>
+        <td><%= conns[i].ip %></td>
+        <td><%= conns[i].port %></td>
+        <td><%= conns[i].peer_address %></td>
+        <td><%= conns[i].user %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  
   
 </div>

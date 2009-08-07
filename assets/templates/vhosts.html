@@ -28,7 +28,7 @@
 		are_you_sure("Are you sure you want to remove "+vhost, function() {
   		post_delete("/vhosts/"+vhost, {
   		  data: $.toJSON(dataString),
-  			success: function(data) {$("li#"+vhost).remove();}
+  			success: function(data) {$("td#"+vhost).remove();}
   		});
 		});
 	});	
@@ -38,10 +38,15 @@
   
   <div class="add"><h3>Vhosts</h3></div>
   
-  <ul id="vhosts_list">
+  <table id="vhost_lists" class="sexy_table">
+    <tr>
+      <th>Name</th>
+    </tr>
     <% for ( var i = 0; i < vhosts.length; i++ ) { %>
-      <li id="<%= vhosts[i] %>"><div class='remove'><a href='#' rel='<%= vhosts[i] %>'></a><%= vhosts[i] %></div></li>
+      <tr>
+        <td id="<%= vhosts[i] %>"><div class='remove'><a href='#' rel='<%= vhosts[i] %>'><%= vhosts[i] %></a></td>
+      </tr>
     <% } %>
-  </ul>
+  </table>
   
 </div>

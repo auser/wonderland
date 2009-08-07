@@ -1,15 +1,30 @@
 <div id="queues">
-
+  
   <h3>Queues</h3>
   
-  <% for ( var i = 0; i < queues.length; i++ ) { %>
-    <hr />
-    <% console.log(queues[i]); %>
-    <ul id="conn_status_<%=i%>">
-      <% traverse('queues', queues[i], function(key, val) { %>
-        <li><%= key %> = <%= val %></li>
-      <% }); %>
-    </div>
-  <% } %>
-
+  <table id="data" class="sexy_table">
+  	<caption>Queues</caption>
+  	<thead>
+      <tr>
+        <th>Name</th>
+        <th>Vhost</th>
+        <th>Memory</th>
+        <th>Messages</th>
+        <th>Consumers</th>
+        <th>Unacknowledged</th>
+      </tr>
+  	</thead>
+  	<tbody>
+      <% for ( var i = 0; i < queues.length; i++ ) { %>
+        <tr>
+          <td><%= queues[i].name %></td>
+          <td><%= queues[i].vhost %></td>
+          <td><%= queues[i].memory %></td>
+          <td><%= queues[i].messages %></td>
+          <td><%= queues[i].consumers %></td>
+          <td><%= queues[i].messages_unacknowledged %></td>          
+        </tr>
+      <% } %>  	</tbody>
+  </table>
+  
 </div>

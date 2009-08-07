@@ -31,7 +31,7 @@
 		are_you_sure("Are you sure you want to remove "+user, function() {
 		  post_delete("/users/"+user, {
   		  data: $.toJSON(dataString),
-  			success: function(data) {$("li#"+user).remove();}
+  			success: function(data) {$("td#"+user).remove();}
   		});
 		});
 	});	
@@ -40,11 +40,21 @@
 <div id="users">
   
   <div class="add"><h3>Users</h3></div>
+    
+  <table id="data" class="sexy_table">
+  	<caption>Users</caption>
+  	<thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+  	</thead>
+  	<tbody>
+      <% for ( var i = 0; i < users.length; i++ ) { %>
+        <tr>
+          <td id="<%= users[i] %>"><div class='remove'><a href='#' rel='<%= users[i] %>'><%= users[i] %></a></td>
+        </tr>
+      <% } %>  	</tbody>
+  </table>
   
-  <ul id="users_list">
-    <% for ( var i = 0; i < users.length; i++ ) { %>
-      <li id="<%= users[i] %>"><div class='remove'><a href='#' rel='<%= users[i] %>'></a><%= users[i] %></div></li>
-    <% } %>
-  </ul>
   
 </div>

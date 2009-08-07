@@ -1,0 +1,58 @@
+<div id="dashboard">
+  
+  <h3>Dashboard</h3>
+    
+  <% for ( var i = 0; i < dashboard.length; i++ ) { %>
+    <!-- each vhost -->
+    <% $.each(dashboard[i], function(k,v) { %>
+      <table class="sexy_table">
+      <caption>vhost: <%= k %></caption>
+      <!-- header -->
+      <thead>
+        <tr>
+        </tr>
+      </thead>
+      <!-- footer -->
+      <tfoot>
+        <tr>
+          <td></td>
+        </tr>
+      </tfoot>
+      <!-- body -->
+      <tbody>
+        <tr><th>Memory</th><th>Messages</th><th colspan="4"></th></tr>
+        <tr>
+          <td><%= v.data.memory %></td>
+          <td><%= v.data.messages %></td>
+          <td colspan="4"></td>
+        </tr>
+        <tr><th>Queues</th><th colspan="5"></tr>
+        <tr>
+          <th>Name</th>
+          <th>Memory</th>
+          <th>Messages</th>
+          <th>Consumers</th>
+          <th>Unacknowledged</th>
+          <th></th>
+        </tr>
+        <% for ( var i = 0; i < v.queues.length; i++ ) { %>
+          <tr>
+            <!-- Each queue -->
+            <% $.each(v.queues[i], function(k,v) { %>
+              <tr>
+              <td><%= v.name %></td>
+              <td><%= v.memory %></td>
+              <td><%= v.messages %></td>
+              <td><%= v.consumers %></td>
+              <td><%= v.messages_unacknowledged %></td>
+              <td colspan="2"></td>
+              </tr>
+            <% }); %>
+          </tr>
+        <% } %>        
+      </tbody>
+    <% }); %>
+    </table>
+  <% } %>
+  
+</div>

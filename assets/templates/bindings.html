@@ -1,15 +1,25 @@
 <div id="bindings">
   
   <h3>Bindings</h3>
+
+  <table id="data" class="sexy_table">
+  	<caption>Bindings</caption>
+  	<thead>
+      <tr>
+        <th>Queue</th>
+        <th>Exchange</th>
+        <th>From</th>
+      </tr>
+  	</thead>
+  	<tbody>
+      <% for ( var i = 0; i < bindings.length; i++ ) { %>
+        <tr>
+          <td><%= bindings[i].queue %></td>
+          <td><%= bindings[i].exchange %></td>
+          <td><%= bindings[i].from_queue %></td>
+        </tr>
+      <% } %>  	</tbody>
+  </table>
   
-  <ul id="bindings_list">
-    <% for ( var i = 0; i < bindings.length; i++ ) { %>
-      <ul id="<%= bindings[i] %>">
-        <li>Conn: <%= bindings[i].queue %></li>
-        <li>Exchange: <%= bindings[i].exchange %></li>
-        <li>From: <%= bindings[i].from_queue %></li>
-      </li>
-    <% } %>
-  </ul>
   
 </div>

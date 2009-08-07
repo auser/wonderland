@@ -80,13 +80,7 @@ li {
 	font-size: 26px;
 }
 
-#content ul li {
-	color: #115;
-	list-style-type: none;
-	text-align: left;
-  font-family: Palatino, "Palatino Linotype", Serif;  
-  text-decoration: none;
-	margin: 10px;
+#content .listing {
 }
 
 #sidebar {
@@ -107,7 +101,7 @@ li {
 	padding-left: 20px;
 }
 
-#sidebar dl dt#node_status_link { background: url("../images/server.png") no-repeat 0 center;	}
+#sidebar dl dt#dashboard { background: url("../images/server.png") no-repeat 0 center;	}
 #sidebar dl dt#vhosts_link { background: url("../images/transmit.png") no-repeat 0 center;	}
 #sidebar dl dt#users_link { background: url("../images/user_suit.png") no-repeat 0 center;	}
 #sidebar dl dt#connections_link { background: url("../images/connect.png") no-repeat 0 center;}
@@ -174,5 +168,46 @@ li {
 	padding-left: 25px;
 }
 
-.remove:hover {background: url("../images/delete.png") no-repeat 2px top;}
-.remove a {padding-left: 25px;}
+.remove:hover {background: url("../images/delete.png") no-repeat 0px top;}
+.remove a {}
+
+
+/*Tables*/
+table {
+  border: 1px solid #333;
+  margin-bottom: 15px;
+}
+td{}
+th{}
+
+.sexy_table {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 0.8em;
+	text-align: left;
+	width: 460px;
+}
+
+.sexy_table th.head {  
+  background: #fff;
+}
+.sexy_table th {  
+  background: #eef;
+}
+.sexy_table th
+{  
+	padding: 12px 17px 12px 17px;
+	font-weight: normal;
+	font-size: 14px;
+	color: #039;
+	border-bottom: 1px solid #69c;
+}
+.sexy_table td
+{
+	padding: 7px 17px 7px 17px;
+	color: #669;
+}
+.sexy_table tbody tr:hover td
+{
+	color: #339;
+	background: #d0dafd;
+}

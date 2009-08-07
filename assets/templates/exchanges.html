@@ -5,17 +5,28 @@
   
   <h3>Exchanges</h3>
   
-  <ul id="exchanges_list">
-    <% for ( var i = 0; i < exchanges.length; i++ ) { %>
-      <ul id="exchanges_<%= [i] %>">
-        <li>Name: <%= exchanges[i].name %></li>
-        <li>Topic: <%= exchanges[i].type %></li>
-        <li>Durable: <%= exchanges[i].durable %></li>
-        <li>Auto delete: <%= exchanges[i].auto_delete %></li>
-        <li>Arguments: <%= exchanges[i].arguments %></li>
-      </li>
-      <hr />
-    <% } %>
-  </ul>
+  <table id="data" class="sexy_table">
+  	<caption>Exchanges</caption>
+  	<thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Durable</th>
+        <th>Auto delete</th>
+        <th>Arguments</th>
+      </tr>
+  	</thead>
+  	<tbody>
+      <% for ( var i = 0; i < exchanges.length; i++ ) { %>
+        <tr>
+          <td><%= exchanges[i].name %></td>
+          <td><%= exchanges[i].type %></td>
+          <td><%= exchanges[i].durable %></td>
+          <td><%= exchanges[i].auto_delete %></td>
+          <td><%= exchanges[i].arguments %></td>
+        </tr>
+      <% } %>  	</tbody>
+  </table>
+  
   
 </div>

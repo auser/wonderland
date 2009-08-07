@@ -1,4 +1,4 @@
-;(function($) {
+(function($) {
   var app = $.sammy(function() { with(this) {
     element_selector = '#content';
     
@@ -8,12 +8,19 @@
 	  var error = function(text) {context.trigger('error', {message: text});}
 		var notice = function(text) {context.trigger('notice', {message: text});}
     
-    // display tasks
+    // display tasks    
     get('#/', function() { with (this) {
-			get_page("/control/status", {
-				success: function(data) {partial('/assets/templates/node_status.html', $(data.status)[0]);},
-				error: function() {error("Unable to load vhost information");}
+			get_page("/dashboard", {
+				success: function(data) {partial('/assets/templates/dashboard.html', data);},
+				error: function() {error("Unable to load dashboard");}
 			});
+    }});
+    
+    get('#/status', function() { with (this) {
+      get_page("/control/status", {
+        success: function(data) {partial('/assets/templates/node_status.html', $(data.status)[0]);},
+        error: function() {error("Unable to load vhost information");}
+      });
     }});
 
     get('#/vhosts', function() { with (this) {			
@@ -55,7 +62,7 @@
 			var vhost;
 			if (params["name"]) {vhost = params["name"];} else {vhost = "root"};
 	get_page("/queues/"+vhost+"/name/durable/auto_delete/arguments/messages_ready/messages_unacknowledged/messages_uncommitted/messages/acks_uncommitted/consumers/transactions/memory", {
-				success: function(data) {console.log(data);partial('/assets/templates/queues.html', data)},
+				success: function(data) {partial('/assets/templates/queues.html', data)},
 				error: function() {error("Unable to load queues");}
 			});
     }});
@@ -76,4 +83,5 @@
   $(function() {
     app.run('#/');
   })
+  
 })(jQuery);
