@@ -22,15 +22,24 @@
 	 
   });
 	
-	$(".remove a").click(function() {						
-		var vhost = this.rel;
-		var dataString = {"name" : vhost};
-		are_you_sure("Are you sure you want to remove "+vhost, function() {
-  		post_delete("/vhosts/"+vhost, {
-  		  data: $.toJSON(dataString),
-  			success: function(data) {$("td#"+vhost).remove();}
-  		});
-		});
+	$(".remove a").click(function() {
+    var vhost = this.rel;
+	  jQuery.facebox('
+    <p>Delete: '+ vhost +' </p>
+    <form id="delete_vhost_form" action="#/vhosts" method="post">
+      <p><input type="submit" value="Delete vhost" /></p>
+    </form>
+    ');
+
+    $("form#delete_vhost_form").submit(function() {
+      var dataString = {"name" : vhost};
+      are_you_sure("Are you sure you want to remove "+vhost, function() {
+        post_delete("/vhosts/"+vhost, {
+             data: $.toJSON(dataString),
+             success: function(data) {$("td#"+vhost).remove();}
+           });
+      });
+    });
 	});	
 </script>
 
