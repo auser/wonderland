@@ -25,15 +25,47 @@
 	 
   });
 	
-	$(".remove a").click(function() {						
-		var user = this.rel;
-		var dataString = {"name" : user};
-		are_you_sure("Are you sure you want to remove "+user, function() {
-		  post_delete("/users/"+user, {
-  		  data: $.toJSON(dataString),
-  			success: function(data) {$("td#"+user).remove();}
-  		});
-		});
+	$(".remove a").click(function() {
+    var user = this.rel;
+	  jQuery.facebox('
+    <form id="update_user_form" action="#/users" method="post">
+      <p>Editing user: '+ user +' </p>
+      <p><label for="password">New password:</label><input type="text" id="password" name="password" /></p>
+      <p><label for="repeat_password">Enter password again:</label><input type="text" id="repeat_password" name="repeat_password" /></p>
+      <p><input type="submit" value="Update user" /></p> 
+    </form>
+    <p>Or delete: '+ user +' </p>
+    <form id="delete_user_form" action="#/users" method="post">
+      <p><input type="submit" value="Delete user" /></p>
+    </form>
+    ');
+    
+    $("form#update_user_form").submit(function() {
+  		var pass = $("#password").val();
+  		var pass2 = $("#repeat_password").val();
+  		
+  		if (pass == pass2) {
+  		  var dataString = {"name" : user, "password" : pass};
+  		  alert("Updating password");
+  		  put("/users/"+user, {
+  		    data: $.toJSON(dataString),
+  		    success: function(data) {}
+  		  })
+  		} else {
+  		  alert("The passwords didn't match. Please re-enter");
+  		};
+    });
+    
+    $("form#delete_user_form").submit(function() {
+      var dataString = {"name" : user};
+      are_you_sure("Are you sure you want to remove "+user, function() {
+        post_delete("/users/"+user, {
+             data: $.toJSON(dataString),
+             success: function(data) {$("td#"+user).remove();}
+           });
+      });
+    });
+    
 	});	
 </script>
 

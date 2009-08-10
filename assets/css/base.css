@@ -211,3 +211,8 @@ th{}
 	color: #339;
 	background: #d0dafd;
 }
+
+/** Specifics **/
+#update_user_form {
+  text-align: left;
+}

@@ -25,6 +25,10 @@ function post(url, opts) {
 	_ajax_method("POST", url, opts);
 };
 
+function put(url, opts) {
+	_ajax_method("PUT", url, opts);
+};
+
 function post_delete(url, opts) {
 	_ajax_method("DELETE", url, opts);
 };
