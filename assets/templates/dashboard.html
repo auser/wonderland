@@ -53,14 +53,14 @@
       <tr><th>Running Nodes</th></tr>
       <tr>
         <% for ( var i = 0; i < status.running_nodes.length; i++ ) { %>
-          <td><%= status.running_nodes[i] %></td>
+          <tr><td><%= status.running_nodes[i] %></td></tr>
         <% } %>
       </tr>
       
       <tr><th>Nodes</th></tr>
       <tr>
         <% for ( var i = 0; i < status.nodes.length; i++ ) { %>
-          <td><%= status.nodes[i] %></td>
+          <tr><td><%= status.nodes[i] %></td></tr>
         <% } %>
       </tr>
     </table>
