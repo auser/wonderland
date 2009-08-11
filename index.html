@@ -75,11 +75,21 @@
   </div>
   
   <div id="footer">
+    Version <div id="version_number">0.1</div>
     2009 Ari Lerner, Nate Murray, Michael Fairchild @ CloudTeam
   </div>
   
   <div class="hidden">    
   </div>
+  
+  <script type="text/javascript" charset="utf-8">
+    get_page("/version", {
+      success: function(d) {
+        console.log(d);
+        $("#version_number").html(d.version)
+      }
+    });
+  </script>
 </body>
 
 </html>
