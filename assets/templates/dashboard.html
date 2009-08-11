@@ -29,7 +29,7 @@
         
       </tr></thead>
       <tbody>
-        <th>Memory used</th>
+        <th>Memory free</th>
         <th>Used queue memory</th>
         <th>System memory</th>
         <th>Messages</th>
@@ -37,8 +37,8 @@
       </tbody>
         <tr>
           <td><%= system.percent_memory %>%</td>
-          <td><%= system.total_queue_memory / 1000000 %>mb</td>
-          <td><%= system.system_memory / 1000000 %>mb</td>
+          <td><%= system.total_queue_memory / 1000000 %>MB</td>
+          <td><%= system.system_memory / 1000000 %>MB</td>
           <td><%= system.total_messages %></td>
           <td><%= system.consumers %></td>
         </tr>
