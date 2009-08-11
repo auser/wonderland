@@ -1,58 +1,123 @@
+<script type="text/javascript" charset="utf-8">
+  $("#vhost_listing h3 a").click(function(data) {
+    var div = $(this).parent().parent();
+    var table = $(div).children("table");
+    $(table).show();
+
+    $(this).click(function(data) {$(table).toggle();});
+  });
+  $("#vhost_listing table").hide();
+  $(".vhost_reveal thead").click(function(data) {
+    var table = $(this).parent();
+    var tbody = $(table).children("tbody")[0];
+    $(tbody).show();
+  
+    $(this).click(function(data) { $(tbody).toggle(); });
+  });
+  $(".vhost_reveal tbody").hide();    
+</script>
+
 <div id="dashboard">
   
   <h3>Dashboard</h3>
-    
-  <% for ( var i = 0; i < dashboard.length; i++ ) { %>
-    <!-- each vhost -->
-    <% $.each(dashboard[i], function(k,v) { %>
-      <table class="sexy_table">
-      <caption>vhost: <%= k %></caption>
-      <!-- header -->
-      <thead>
-        <tr>
-        </tr>
-      </thead>
-      <!-- footer -->
-      <tfoot>
-        <tr>
-          <td></td>
-        </tr>
-      </tfoot>
-      <!-- body -->
+  
+  <div id="status">
+
+    <table class="sexy_table">
+      <caption>System view</caption>
+      <thead><tr>
+        
+      </tr></thead>
       <tbody>
-        <tr><th>Memory</th><th>Messages</th><th colspan="4"></th></tr>
-        <tr>
-          <td><%= v.data.memory %></td>
-          <td><%= v.data.messages %></td>
-          <td colspan="4"></td>
-        </tr>
-        <tr><th>Queues</th><th colspan="5"></tr>
-        <tr>
-          <th>Name</th>
-          <th>Memory</th>
-          <th>Messages</th>
-          <th>Consumers</th>
-          <th>Unacknowledged</th>
-          <th></th>
-        </tr>
-        <% for ( var i = 0; i < v.queues.length; i++ ) { %>
-          <tr>
-            <!-- Each queue -->
-            <% $.each(v.queues[i], function(k,v) { %>
-              <tr>
-              <td><%= v.name %></td>
-              <td><%= v.memory %></td>
-              <td><%= v.messages %></td>
-              <td><%= v.consumers %></td>
-              <td><%= v.messages_unacknowledged %></td>
-              <td colspan="2"></td>
-              </tr>
-            <% }); %>
-          </tr>
-        <% } %>        
+        <th>Memory used</th>
+        <th>Used queue memory</th>
+        <th>System memory</th>
+        <th>Messages</th>
+        <th>Consumers</th>
       </tbody>
-    <% }); %>
+        <tr>
+          <td><%= system.percent_memory %></td>
+          <td><%= system.total_queue_memory / 1000000 %>mb</td>
+          <td><%= system.system_memory / 1000000 %>mb</td>
+          <td><%= system.total_messages %></td>
+          <td><%= system.consumers %></td>
+        </tr>
+      </tbody>
     </table>
-  <% } %>
+    
+    <table class="sexy_table">
+      <caption>Dashboard view</caption>
+      <tr><th>Applications</th></tr>
+      <tr><td><%= status.applications %></td></tr>
+      
+      <tr><th>Running Nodes</th></tr>
+      <tr>
+        <% for ( var i = 0; i < status.running_nodes.length; i++ ) { %>
+          <td><%= status.running_nodes[i] %></td>
+        <% } %>
+      </tr>
+      
+      <tr><th>Nodes</th></tr>
+      <tr>
+        <% for ( var i = 0; i < status.nodes.length; i++ ) { %>
+          <td><%= status.nodes[i] %></td>
+        <% } %>
+      </tr>
+    </table>
+    
+  </div>
+  
+  <div id="vhost_listing">
+    <h3><a href="#">Vhosts</a></h3>
+    <% for ( var i = 0; i < dashboard.length; i++ ) { %>
+      <!-- each vhost -->
+      <% $.each(dashboard[i], function(k,v) { %>
+        <table class="sexy_table vhost_reveal">
+        <!-- header -->
+        <thead>
+          <tr>
+            <td><a href="#" rel="vhost: <%= k %>">vhost: <%= k %></a></td>
+          </tr>
+        </thead>
+        <!-- footer -->
+        <tfoot>
+        </tfoot>
+        <!-- body -->
+        <tbody>
+          <tr><th>Memory</th><th>Messages</th><th colspan="4"></th></tr>
+          <tr>
+            <td><%= v.data.memory %></td>
+            <td><%= v.data.messages %></td>
+            <td colspan="4"></td>
+          </tr>
+          <tr><th>Queues</th><th colspan="5"></tr>
+          <tr>
+            <th>Name</th>
+            <th>Memory</th>
+            <th>Messages</th>
+            <th>Consumers</th>
+            <th>Unacknowledged</th>
+            <th></th>
+          </tr>
+          <% for ( var i = 0; i < v.queues.length; i++ ) { %>
+            <tr>
+              <!-- Each queue -->
+              <% $.each(v.queues[i], function(k,v) { %>
+                <tr>
+                <td><%= v.name %></td>
+                <td><%= v.memory %></td>
+                <td><%= v.messages %></td>
+                <td><%= v.consumers %></td>
+                <td><%= v.messages_unacknowledged %></td>
+                <td colspan="2"></td>
+                </tr>
+              <% }); %>
+            </tr>
+          <% } %>        
+        </tbody>
+      <% }); %>
+      </table>
+    <% } %>
+  </div>
   
 </div>

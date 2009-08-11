@@ -11,7 +11,22 @@
     // display tasks    
     get('#/', function() { with (this) {
 			get_page("/dashboard", {
-				success: function(data) {partial('/assets/templates/dashboard.html', data);},
+				success: function(data) {
+				  get_page("/control/status", {
+				    success: function(d) {
+    				  data.status = $(d.status)[0];
+    				  
+    				  get_page("/system", {
+    				    success: function(a) {
+    				      data.system = $(a.system)[0];
+    				      partial('/assets/templates/dashboard.html', data);
+    				    },
+    				    error: function() {return "BAH";}
+    				  });
+				    },
+				    error: function() {return "";}
+				  });
+				},
 				error: function() {error("Unable to load dashboard");}
 			});
     }});
