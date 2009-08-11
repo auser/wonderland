@@ -84,10 +84,7 @@
   
   <script type="text/javascript" charset="utf-8">
     get_page("/version", {
-      success: function(d) {
-        console.log(d);
-        $("#version_number").html(d.version)
-      }
+      success: function(d) { $("#version_number").html(d.version) }
     });
   </script>
 </body>
