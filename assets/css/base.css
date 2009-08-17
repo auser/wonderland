@@ -108,6 +108,7 @@ li {
 #sidebar dl dt#queues_link { background: url("../images/basket.png") no-repeat 0 center;}
 #sidebar dl dt#bindings_link { background: url("../images/bindings.png") no-repeat 0 center;}
 #sidebar dl dt#exchanges_link { background: url("../images/exchanges.png") no-repeat 0 center;}
+#sidebar dl dt#permissions_link { background: url("../images/permission.png") no-repeat 0 center;}
 
 #sidebar dl dd {
   margin-left: 2px;
@@ -211,6 +212,8 @@ th{}
 	color: #339;
 	background: #d0dafd;
 }
+
+.no_border {border: 0;}
 
 /** Specifics **/
 #update_user_form {

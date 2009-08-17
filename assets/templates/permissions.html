@@ -1,0 +1,52 @@
+<script type="text/javascript" charset="utf-8">
+  $(".user a").click(function(data) {
+    var username = this.rel;
+    var div = $(this).parent();
+    get_page("/permissions/"+username, {
+			success: function(data) {
+			  var html = '
+          <h3>Details for: '+username + '</h3>
+          <table class="sexy_table no_border"><caption>Vhosts</caption>
+          <tbody>';
+          for (var i=0; i < data.permissions.users.length; i++) {
+            html = html + '<tr><td>';
+            for (var j=0; j < data.permissions.users[i].vhosts.length; j++) { html = html + data.permissions.users[i].vhosts[j]; };
+            html = html + "</td><td>";
+          };
+          html = html + "</tbody>";
+    	  jQuery.facebox(html);
+			},
+			error: function() {error("Unable to load user: "+username);}
+		});
+  });
+</script>
+
+<div id="permission">
+  
+  <h3>Permissions</h3>
+  
+  <% for ( var i = 0; i < permissions.vhosts.length; i++ ) { %>    
+    <table id="data" class="sexy_table">
+    	<caption>Permissions for <%= permissions.vhosts[i].name %></caption>
+    	<thead>
+        <tr>
+          <th>User</th>
+          <th>Read</th>
+          <th>Write</th>
+          <th>Configure</th>
+        </tr>
+    	</thead>
+    	<tbody>
+          <tr class="user">
+            <% for (var j = 0; j < permissions.vhosts[i].users.length; j++ ) { %>
+              <td><a rel="<%= permissions.vhosts[i].users[j][0] %>"><%= permissions.vhosts[i].users[j][0] %></a></td>
+              <td><%= permissions.vhosts[i].users[j][1] %></td>
+              <td><%= permissions.vhosts[i].users[j][2] %></td>
+              <td><%= permissions.vhosts[i].users[j][3] %></td>
+            <% } %>
+          </tr>
+        </tbody>
+    </table>
+  <% } %>  	
+  
+</div>

@@ -52,6 +52,13 @@
 			});
     }});
     
+    get('#/permissions', function() { with (this) {			
+			get_page("/permissions", {
+				success: function(data) {partial('/assets/templates/permissions.html', data);},
+				error: function() {error("Unable to load permissions");}
+			});
+    }});
+    
     get('#/bindings', function() { with (this) {			
 			get_page("/bindings", {
 				success: function(data) {partial('/assets/templates/bindings.html', data);},
