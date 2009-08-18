@@ -88,6 +88,13 @@
 				error: function() {error("Unable to load queues");}
 			});
     }});
+    
+    get('#/dev/update', function() { with (this) {			
+			get_page("/dev/update", {
+				success: function(data) {redirect("#/")},
+				error: function() {error("Unable to update");}
+			});
+    }});
 
     get('#/rabbit_status', function() { with (this) {
 			redirect("#/");
