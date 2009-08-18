@@ -1,16 +1,19 @@
 <script type="text/javascript" charset="utf-8">
-  $(".user a").click(function(data) {
+  $(".user a").click(function(data) {    
     var username = this.rel;
     var div = $(this).parent();
+    
     get_page("/permissions/"+username, {
 			success: function(data) {
+			  var user = data.permissions;
+			  
 			  var html = '
           <h3>Details for: '+username + '</h3>
           <table class="sexy_table no_border"><caption>Vhosts</caption>
           <tbody>';
-          for (var i=0; i < data.permissions.users.length; i++) {
+          for (var i=0; i < user.vhosts.length; i++) {
             html = html + '<tr><td>';
-            for (var j=0; j < data.permissions.users[i].vhosts.length; j++) { html = html + data.permissions.users[i].vhosts[j]; };
+            html = html + user.vhosts[i];
             html = html + "</td><td>";
           };
           html = html + "</tbody>";
@@ -37,14 +40,14 @@
         </tr>
     	</thead>
     	<tbody>
+    	  <% for (var j = 0; j < permissions.vhosts[i].users.length; j++ ) { %>
           <tr class="user">
-            <% for (var j = 0; j < permissions.vhosts[i].users.length; j++ ) { %>
-              <td><a rel="<%= permissions.vhosts[i].users[j][0] %>"><%= permissions.vhosts[i].users[j][0] %></a></td>
-              <td><%= permissions.vhosts[i].users[j][1] %></td>
-              <td><%= permissions.vhosts[i].users[j][2] %></td>
-              <td><%= permissions.vhosts[i].users[j][3] %></td>
-            <% } %>
+              <td><a rel="<%= permissions.vhosts[i].users[j].name %>"><%= permissions.vhosts[i].users[j].name %></a></td>
+              <td><%= permissions.vhosts[i].users[j].read %></td>
+              <td><%= permissions.vhosts[i].users[j].write %></td>
+              <td><%= permissions.vhosts[i].users[j].configure %></td>
           </tr>
+        <% } %>
         </tbody>
     </table>
   <% } %>  	
